@@ -19,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js|jsx$/,
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
@@ -27,6 +27,20 @@ module.exports = {
             presets: ["@babel/preset-env",'@babel/preset-react'],
           },
         },
+      },{
+        test: /\.(css|less)$/,
+        use:[
+            'style-loader',
+            'css-loader',
+           {
+            loader: 'postcss-loader',
+            options:{
+                options: {},
+            }
+
+           },
+            'less-loader'
+        ]
       },
     ],
   },

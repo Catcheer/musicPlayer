@@ -10,7 +10,7 @@
 
  import RouteController from './RouteController.js'
 
-
+import './common/style/index.less'
 
 function App(){
     return <div>
