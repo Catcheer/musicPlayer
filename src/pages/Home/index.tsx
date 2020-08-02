@@ -4,7 +4,7 @@
  * @Date: 2020-07-29 18:25:07
  */ 
 
- import React from 'react'
+ import * as React from 'react'
 
  
 

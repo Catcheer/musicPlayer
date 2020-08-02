@@ -1,5 +1,165 @@
 *{
     margin: 0;
     padding: 0;
-    color: red;
 }
+
+
+
+ul,li{
+    list-style-type: none;
+    list-style: none;
+}
+
+
+
+
+
+/* 一行文本溢出省略... */
+.ellipsis-line-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* 两行文本溢出省略... */
+  .ellipsis-line-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* 三行文本溢出省略... */
+  .ellipsis-line-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  /******************************************************
+   * 布局
+   * 格式 flex-[DIRECTION[-ALIGN_ITEMS[-JUSTIFY_CONTENT]]]
+   ******************************************************/
+  // 垂直居中对齐 flex
+  .flex-v-c-c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  // 垂直居中靠上 flex
+  .flex-v-c-fs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  // 垂直居中靠左 flex
+  .flex-v-fs-c {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  // 垂直居中靠右
+  .flex-v-fe-c {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  // 垂直分散靠右 flex
+  .flex-v-sb-e {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  // 垂直左对齐靠上
+  .flex-v-f-t {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  // 垂直分散靠左 flex
+  .flex-v-fs-sb {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  // 水平底对齐靠左 flex
+  .flex-h-fe-fs {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  // 水平顶对齐靠左 flex
+  .flex-h-fs-fs {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  // 水平居中靠右 flex
+  .flex-h-c-fe {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  // 水平居中左对齐 flex
+  .flex-h-c-fs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  // 水平居中对齐 flex
+  .flex-h-c-c {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  // 水平分散中间对齐 flex
+  .flex-h-c-sb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  // space-around
+  .flex-h-c-sa {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  // 水平分散顶部对齐 flex
+  .flex-h-fs-sb {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .flex-h-fe-sb {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  // 水平分散
+  .flex-h-fe-stretch {
+    // stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

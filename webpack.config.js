@@ -10,7 +10,7 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
@@ -18,16 +18,24 @@ module.exports = {
   },
   module: {
     rules: [
+      // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      { test: /\.tsx?$/, loader: "ts-loader" },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env",'@babel/preset-react'],
-          },
-        },
-      },{
+        use: [
+         
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env",'@babel/preset-react'],
+            },
+          }
+        ],
+      },
+      
+      {
         test: /\.(css|less)$/,
         use:[
             'style-loader',
@@ -41,9 +49,30 @@ module.exports = {
            },
             'less-loader'
         ]
-      },
+      },{
+        test:/\.(jpg|jpeg|png|gif)$/,
+        include:path.resolve(__dirname, 'src'),
+        use:[{
+          loader:'url-loader',
+          options:{
+            limit: 8192,
+            esModule: false,
+            name:'[name]-[hash].[ext]'
+          }
+        }]
+      },{
+        test:/\.html$/,
+        use:[{
+          loader:'html-loader',
+        }]
+      }
     ],
   },
+
+//   externals: {
+//     "react": "React",
+//     "react-dom": "ReactDOM"
+// },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -53,7 +82,13 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
-    port: 8080,
+    port: 8089,
     historyApiFallback: true
   },
+  resolve:{
+    extensions:[".ts",'.tsx','.js','.jsx','.json'],
+    alias:{
+      '@':path.join(__dirname,"./src")
+    }
+  }
 };
