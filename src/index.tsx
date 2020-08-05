@@ -11,7 +11,6 @@ import RouteController from './RouteController'
 import './common/style/index.less'
 
 
-
 function App(){
     return <div>
       <RouteController />

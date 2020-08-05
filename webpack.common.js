@@ -5,8 +5,7 @@
  */
 
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+
 
 module.exports = {
   mode: "development",
@@ -42,14 +41,31 @@ module.exports = {
             'css-loader',
            {
             loader: 'postcss-loader',
-            options:{
-                options: {},
+            options: {
+              indet: 'postcss',
+              sourceMap: true,
+              plugins: (loader) => [
+                  require('autoprefixer')({overrideBrowserslist: ['> 0.15% in CN']})
+              ]
             }
 
            },
             'less-loader'
         ]
-      },{
+      },
+      
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+      {
         test:/\.(jpg|jpeg|png|gif)$/,
         include:path.resolve(__dirname, 'src'),
         use:[{
@@ -73,22 +89,5 @@ module.exports = {
 //     "react": "React",
 //     "react-dom": "ReactDOM"
 // },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./template/index.html",
-    }),
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
-    port: 8089,
-    historyApiFallback: true
-  },
-  resolve:{
-    extensions:[".ts",'.tsx','.js','.jsx','.json'],
-    alias:{
-      '@':path.join(__dirname,"./src")
-    }
-  }
+ 
 };

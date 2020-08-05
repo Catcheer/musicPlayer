@@ -6,12 +6,13 @@
 
 import  React,{ useState } from "react";
  
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { withRouter } from "react-router";
 
 import Home from "./pages/Home/index";
 import My from "./pages/My/index";
-import Transfer from "./pages/transfer/index";
-
+import Category from './pages/Category/index'
+import Transfer from "./pages/Transfer/index";
 import "./common/style/route.less";
 
  function RouteController() {
@@ -30,62 +31,82 @@ import "./common/style/route.less";
 }
 
 function Content() {
+
+  const [navList,setNavList]=useState([
+    {
+      text: "首页",
+      icon: "tab_home.png",
+      iconActive: "tab_home_active.png",
+      path:"/content/home",
+      component:Home
+    },
+    {
+      text: "分类",
+      icon: "tab_class.png",
+      iconActive: "tab_class_active.png",
+      path:"/content/category",
+      component:Category
+    },
+    {
+      text: "我的",
+      icon: "tab_my.png",
+      iconActive: "tab_my_active.png",
+      path:"/content/my",
+      component:My
+    },
+
+  ])
+
+  const BottomNavWithRouter=withRouter(React.memo(BottomNav))
+
   return (
     <section>
       <Switch>
-        <Route path="/content/home">
-          <Home />
-        </Route>
-        <Route path="/content/my">
-          <My />
-        </Route>
+        {
+          navList.map((item,index)=>{
+            const {path,component:Component}=item
+            return <Route path={path} key={path}>
+                <Component />
+            </Route>
+          })
+        }
       </Switch>
-      <BottomNav  />
+      <BottomNavWithRouter  navList={navList}  />
     </section>
   );
 }
 
 
 
-function BottomNav() {
+function BottomNav(props:any) {
+  const [current, setCurrent] = useState(props.navList[0]);
+  const {navList}=props
 
-  const [current, setCurrent] = useState(0);
-  const [navList, setNavList] = useState([
-    {
-      text: "首页",
-      icon: "tab_home.png",
-      iconActive: "tab_home_active.png",
-    },
-    {
-      text: "分类",
-      icon: "tab_class.png",
-      iconActive: "tab_class_active.png",
-    },
-    {
-      text: "我的",
-      icon: "tab_my.png",
-      iconActive: "tab_my_active.png",
-    },
-  ]);
- const handleChangeNav=(index: any)=>{
-    setCurrent(index) 
+ 
+  
+  console.log('props',props)
+ 
+ const handleChangeNav=(obj: any)=>{
+    setCurrent(obj) 
+    props.history.push(obj.path)
+    
   }
-
 
   return (
     <>
       <ul className="nav_list flex-h-c-sb">
-        {navList.map((item, index) => {
+        {navList.map((item:any, index:number) => {
           return (
             <li key={item.icon} className="flex-v-c-c" onClick={()=>{
-              handleChangeNav(index)
+              handleChangeNav(item);
+              
             }}>
               <img
                 className="icon_nav"
-                src={require(`../src/images/${current===index?item.iconActive:item.icon}`)}
+                src={require(`../src/images/${current.path===item.path?item.iconActive:item.icon}`)}
                 alt=""
               />
-              <div>{item.text}</div>
+              <div className={ current.path===item.path?'txt  active_txt':'txt'}>{item.text}</div>
             </li>
           );
         })}
