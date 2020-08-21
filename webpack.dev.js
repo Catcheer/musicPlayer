@@ -29,6 +29,7 @@ module.exports= merge(common,{
     compress: true,
     port: 8089,
     historyApiFallback: true,
+    hot: true,
     host: '0.0.0.0',//your ip address
   },
   resolve:{
