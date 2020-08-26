@@ -5,11 +5,12 @@
  */
 
 const path = require("path");
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: ["react-hot-loader/patch","./src/index.tsx"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
@@ -19,7 +20,30 @@ module.exports = {
     rules: [
       // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
       // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.tsx?$/, 
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+            babelrc: false,
+            presets: [
+              [
+                "@babel/preset-env",
+                { targets: { browsers: "last 2 versions" } } // or whatever your project requires
+              ],
+              "@babel/preset-typescript",
+              "@babel/preset-react"
+            ],
+            plugins: [
+              // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+              ["@babel/plugin-proposal-decorators", { legacy: true }],
+              ["@babel/plugin-proposal-class-properties", { loose: true }],
+              "react-hot-loader/babel"
+            ]
+          }
+        }
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
@@ -84,6 +108,9 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new ProgressBarPlugin()
+  ],
 
 //   externals: {
 //     "react": "React",

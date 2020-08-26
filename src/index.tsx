@@ -2,16 +2,26 @@
  * @Description: 
  * @Author: zhangchuangye
  * @Date: 2020-07-28 18:20:55
- */ 
+ */
 
-import  React from 'react'
-import  ReactDOM from 'react-dom'
-import { ConfigProvider, DatePicker, message, Alert } from 'antd';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-
-import RouteController from './RouteController'
+import { hot } from 'react-hot-loader/root';
 
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { PersistGate } from 'redux-persist/integration/react'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from './store'
+
+import RouteController from './pages/route/RouteController'
+
+import { ConfigProvider } from 'antd';
 import './common/style/index.less'
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
@@ -19,14 +29,31 @@ import zhCN from 'antd/es/locale/zh_CN';
 import moment from 'moment';
 moment.locale('zh-cn');
 
-function App(){
-    return <ConfigProvider locale={zhCN}>
-    <div>
-      <RouteController />
-    </div>
-    </ConfigProvider>
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  stateReconciler: autoMergeLevel2 
 }
-ReactDOM.render(<App />,document.querySelector('#app'))
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+let store = createStore(persistedReducer)
+  let persistor = persistStore(store)
+
+function App() {
+  return <ConfigProvider locale={zhCN}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouteController />
+      </PersistGate>
+    </Provider>
+  </ConfigProvider>
+}
+
+const HotApp = hot(App)
+
+ReactDOM.render(<HotApp />, document.querySelector('#app'))
 
 if ((module as any).hot) {
   (module as any).hot.accept()

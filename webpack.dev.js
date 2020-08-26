@@ -37,6 +37,7 @@ module.exports= merge(common,{
     alias:{
       '@':path.join(__dirname,"./src"),
       "@images":path.join(__dirname,"./src/images"),
+      'react-dom': '@hot-loader/react-dom',
     }
   }
 })

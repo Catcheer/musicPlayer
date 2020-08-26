@@ -7,19 +7,21 @@
 
 import React, { useEffect } from 'react'
 
+import { connect } from 'react-redux'
 
-import Left from './components/left'
-import Center from './components/center'
-import Right from './components/right'
+// import Left from './components/left'
+// import Center from './components/center'
+// import Right from './components/right'
 
 import './style/index.less'
 
-function Transfer() {
+function Transfer(props:any) {
     useEffect(() => {
 
     })
     return <section className="warp">
-        <div className="left">
+        {props.count}
+        {/* <div className="left">
             <Left />
         </div>
         <div className="center">
@@ -27,8 +29,15 @@ function Transfer() {
         </div>
         <div className="right">
             <Right />
-        </div>
+        </div> */}
 
     </section>
 }
-export default Transfer
+
+
+const mapStateToProps=(state:any)=>{
+    console.log('state',state)
+        return {count:state.count}
+}
+
+export default connect(mapStateToProps)(Transfer)
