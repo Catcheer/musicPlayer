@@ -7,7 +7,7 @@ import 'swiper/swiper.scss';
 
 function Banner(){
 
-
+console.log('banner')
     return <Swiper
     spaceBetween={0}
     slidesPerView={1}
@@ -25,4 +25,4 @@ function Banner(){
   </Swiper>
 }
 
-export default Banner
+export default React.memo(Banner)

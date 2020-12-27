@@ -10,3 +10,5 @@
 + react-router
 + Redux-Persist
 + progress-bar-webpack-plugin
++ react-hot-loader
++ Redux

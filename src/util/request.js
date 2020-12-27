@@ -32,6 +32,7 @@ export default {
       })
       .then(function (myJson) {
         console.log(myJson);
+        return myJson
       })
       .catch((err) => {
         console.log(err);

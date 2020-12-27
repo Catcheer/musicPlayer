@@ -38,14 +38,22 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-let store = createStore(persistedReducer)
-  let persistor = persistStore(store)
+let store = createStore(persistedReducer,compose(
+  applyMiddleware(),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+))
+let persistor = persistStore(store)
+
+export const ThemeContext=React.createContext('light')
+
 
 function App() {
   return <ConfigProvider locale={zhCN}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <ThemeContext.Provider value={'dark'}>
         <RouteController />
+        </ThemeContext.Provider>
       </PersistGate>
     </Provider>
   </ConfigProvider>

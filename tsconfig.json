@@ -1,17 +1,25 @@
-{
-    "compilerOptions": {
-      "sourceMap": true,
-      "module": "commonjs",
-      "target": "es5",
-      "allowJs": true,
-      "checkJs": false,
-      "jsx": "react",
-      "removeComments": true,
-      "pretty": true,
-      "skipLibCheck": true,
-      "strict": true,
-      "moduleResolution": "node",
-      "esModuleInterop": true
-    },
-    "exclude": ["node_modules", "lib", "tests"]
-  }
+{"compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./src",
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "removeComments": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules", "lib", "tests"],
+  "paths": {
+    "assets/*": ["src/assets/*"],
+    "@service/*": ["src/service/*"],
+    "*": ["types/*"],
+    "@/*": [
+       "src/*"
+  ]
+}
+}

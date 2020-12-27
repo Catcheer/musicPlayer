@@ -9,35 +9,38 @@ import React, { useEffect } from 'react'
 
 import { connect } from 'react-redux'
 
-// import Left from './components/left'
-// import Center from './components/center'
-// import Right from './components/right'
+import Center from './components/center'
 
 import './style/index.less'
 
 function Transfer(props:any) {
+    console.log('Transfer')
     useEffect(() => {
 
     })
-    return <section className="warp">
-        {props.count}
-        {/* <div className="left">
-            <Left />
-        </div>
-        <div className="center">
-            <Center />
-        </div>
-        <div className="right">
-            <Right />
-        </div> */}
 
+    const handleAdd=()=>{
+            props.handleAdd()
+    }
+    return <section className="warp">
+        <div>{props.count}</div>
+        <button onClick={handleAdd}>add 1</button>
+        <Center />
     </section>
 }
 
 
 const mapStateToProps=(state:any)=>{
-    console.log('state',state)
+    console.log('state----------',state)
         return {count:state.count}
 }
 
-export default connect(mapStateToProps)(Transfer)
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        handleAdd:()=>{
+            dispatch({type:"ADD"})
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Transfer)

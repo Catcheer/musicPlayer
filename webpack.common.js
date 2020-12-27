@@ -112,6 +112,12 @@ module.exports = {
     new ProgressBarPlugin()
   ],
 
+  resolve: {
+    alias: {
+      "@service": path.resolve(__dirname, 'src/service/')
+    }
+  }
+
 //   externals: {
 //     "react": "React",
 //     "react-dom": "ReactDOM"
