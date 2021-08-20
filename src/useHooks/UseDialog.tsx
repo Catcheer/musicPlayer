@@ -1,10 +1,10 @@
 /*
  * @Author: zhangchuangye
  * @Date: 2021-08-20 09:56:23
- * @LastEditTime: 2021-08-20 11:37:16
+ * @LastEditTime: 2021-08-20 12:44:19
  * @LastEditors: zhangchuangye
  * @Description: 
- * @FilePath: /webpack/src/useHooks/UseDialog.jsx
+ * @FilePath: /webpack/src/useHooks/UseDialog.tsx
  * 
  */
 
@@ -75,12 +75,15 @@ function LoadingIcon(){
 }
 
 
-function Dialog(props){
+function Dialog(props:any){
         
         useEffect(()=>{
-                let timer
+                let timer:any
            if(props.loadingVisible){
-                 timer =  setTimeout(props.handleLoadingHide ,2000)
+                //  timer =  setTimeout(props.handleLoadingHide ,2000)
+                 timer =  setTimeout(()=>{
+                  window.controlLoadingVisible(false) 
+                 },2000)
            }
             return ()=>{
                 timer &&   clearTimeout(timer)
@@ -101,17 +104,17 @@ function Dialog(props){
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
         return {
         loadingVisible: state.loadingVisible
         }
       }
 
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps=(dispatch:Function)=>{
         return {
-                handleLoadingHide:()=>{
-                        dispatch({type:"LOADING_HIDE"})
-                }  
+                // handleLoadingHide:()=>{
+                //         dispatch({type:"LOADING_HIDE"})
+                // }  
         }
 }
 

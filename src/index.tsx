@@ -34,30 +34,43 @@ moment.locale('zh-cn');
 const persistConfig = {
   key: 'root',
   storage,
-  stateReconciler: autoMergeLevel2 
+  stateReconciler: autoMergeLevel2
+}
+
+
+ window.controlLoadingVisible = (type: Boolean)=> {
+  if (type) {
+    store.dispatch({
+      type: "LOADING_SHOW"
+    })
+    return
+  }
+  store.dispatch({
+    type: "LOADING_HIDE"
+  })
 }
 
 
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-let store = createStore(persistedReducer,compose(
+let store = createStore(persistedReducer, compose(
   applyMiddleware(),
-  window.devToolsExtension ? window.devToolsExtension() :  (f: any) => f
+  window.devToolsExtension ? window.devToolsExtension() : (f: any) => f
 ))
 // let persistor = persistStore(store)
 
-export const ThemeContext=React.createContext('light')
+export const ThemeContext = React.createContext('light')
 
 
 function App() {
   return <ConfigProvider locale={zhCN}>
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-        <ThemeContext.Provider value={'dark'}>
+      <ThemeContext.Provider value={'dark'}>
         <Dialog />
         <RouteController />
-        </ThemeContext.Provider>
+      </ThemeContext.Provider>
       {/* </PersistGate> */}
     </Provider>
   </ConfigProvider>

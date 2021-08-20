@@ -24,7 +24,8 @@ function Transfer(props:any) {
     }
 
     const handleShowLoading=()=>{
-        props.handleShowLoading()
+        // props.handleShowLoading()
+        window.controlLoadingVisible(true)
     }
 
     return <section className="warp">
@@ -48,9 +49,9 @@ const mapDispatchToProps=(dispatch:Function)=>{
         handleAdd:()=>{
             dispatch({type:"ADD"})
         },
-        handleShowLoading:()=>{
-            dispatch({type:"LOADING_SHOW"})
-        }
+        // handleShowLoading:()=>{
+        //     dispatch({type:"LOADING_SHOW"})
+        // }
     }
 }
 
