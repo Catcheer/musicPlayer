@@ -18,6 +18,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './store'
+import Dialog from './useHooks/UseDialog';
 
 import RouteController from './pages/route/RouteController'
 
@@ -36,13 +37,15 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2 
 }
 
+
+
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 let store = createStore(persistedReducer,compose(
   applyMiddleware(),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+  window.devToolsExtension ? window.devToolsExtension() :  (f: any) => f
 ))
-let persistor = persistStore(store)
+// let persistor = persistStore(store)
 
 export const ThemeContext=React.createContext('light')
 
@@ -50,11 +53,12 @@ export const ThemeContext=React.createContext('light')
 function App() {
   return <ConfigProvider locale={zhCN}>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
         <ThemeContext.Provider value={'dark'}>
+        <Dialog />
         <RouteController />
         </ThemeContext.Provider>
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>
   </ConfigProvider>
 }

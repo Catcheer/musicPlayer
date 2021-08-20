@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { menuList } from './routeList'
 import Transfer from "../Transfer/index";
-import BottomNav from './BottomNav.tsx'
+import BottomNav from './BottomNav'
 
 import "./route.less";
 

@@ -25,8 +25,24 @@ const  count=(state:number=0,action:ActionType)=>{
 }
 
 
+const loadingVisible=(loadingVisible:Boolean=false,action:ActionType)=>{
+    const {type}=action
+   
+    switch(type){
+            case "LOADING_SHOW":
+            return true
+            break;
+            case "LOADING_HIDE":
+            return false
+            break;
+        default:
+            return loadingVisible
+    }
+}
+
  const AppStore=combineReducers({
     count,
+    loadingVisible,
     ...route
  })
 

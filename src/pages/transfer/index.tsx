@@ -22,9 +22,17 @@ function Transfer(props:any) {
     const handleAdd=()=>{
             props.handleAdd()
     }
+
+    const handleShowLoading=()=>{
+        props.handleShowLoading()
+    }
+
     return <section className="warp">
         <div>{props.count}</div>
         <button onClick={handleAdd}>add 1</button>
+        <div>
+            <button onClick={handleShowLoading}>showLoading</button>
+        </div>
         <Center />
     </section>
 }
@@ -35,10 +43,13 @@ const mapStateToProps=(state:any)=>{
         return {count:state.count}
 }
 
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps=(dispatch:Function)=>{
     return {
         handleAdd:()=>{
             dispatch({type:"ADD"})
+        },
+        handleShowLoading:()=>{
+            dispatch({type:"LOADING_SHOW"})
         }
     }
 }
