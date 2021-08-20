@@ -4,20 +4,22 @@
  * @Date: 2020-07-29 18:25:45
  */
 
-import * as React from 'react'
+import React from 'react'
 
-
+import useLoading from './useCanvas'
 
 function My() {
-
+    useLoading(null);
     const handleLoadingShow = () => {
         window.controlLoadingVisible(true)
     }
 
-
     return (<section>
-        my
+        <div>my</div>
+        <div>
         <button onClick={handleLoadingShow}>showloading</button>
+        </div>
+        <canvas id="canvas" width='200' height='200' ></canvas>
     </section>)
 }
 
