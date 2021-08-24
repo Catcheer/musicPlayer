@@ -18,7 +18,8 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from './store'
-import Dialog from './useHooks/UseDialog';
+import Loading from './useHooks/UseLoading/index';
+
 
 import RouteController from './pages/route/RouteController'
 
@@ -68,7 +69,8 @@ function App() {
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
       <ThemeContext.Provider value={'dark'}>
-        <Dialog />
+        <Loading />
+      
         <RouteController />
       </ThemeContext.Provider>
       {/* </PersistGate> */}

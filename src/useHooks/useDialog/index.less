@@ -1,0 +1,49 @@
+.dialog_wrap{
+    position: fixed;
+    z-index: 9;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .main{
+        width: 250px;
+        background: #fff;
+        box-shadow: 1px 1px 6px #dddddd;
+        transform: scale(0.1);
+        transition: all 0.3s ease;
+        .head{
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+        }
+        .body{
+            padding: 10px;
+        }
+        .footer{
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 1px solid #eeeeee;
+            .cancel{
+                background: transparent;
+                border: none;
+                outline: none;
+              
+            }
+            .confirm{
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+    .main.show{
+        transform: scale(1);
+    }
+ }
+
+

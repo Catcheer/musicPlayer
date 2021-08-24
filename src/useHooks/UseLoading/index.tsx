@@ -1,10 +1,10 @@
 /*
  * @Author: zhangchuangye
  * @Date: 2021-08-20 09:56:23
- * @LastEditTime: 2021-08-20 16:51:13
+ * @LastEditTime: 2021-08-24 16:56:55
  * @LastEditors: zhangchuangye
  * @Description: 
- * @FilePath: /webpack/src/useHooks/UseDialog.tsx
+ * @FilePath: /webpack/src/useHooks/UseLoading/index.tsx
  * 
  */
 
@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 
 
 
-import './dialog.less'
+import './index.less'
 
 
 
@@ -75,7 +75,7 @@ function LoadingIcon() {
 }
 
 
-function Dialog(props: any) {
+function Loading(props: any) {
 
   useEffect(() => {
     let timer: any
@@ -91,8 +91,8 @@ function Dialog(props: any) {
   }, [props.loadingVisible])
 
 
-  const Pop = props.loadingVisible ? <div className="dialog_wrap">
-    <div className="dialog_conten">
+  const Pop = props.loadingVisible ? <div className="loading_wrap">
+    <div className="loading_conten">
       <LoadingIcon />
     </div>
   </div> : null
@@ -120,4 +120,4 @@ const mapDispatchToProps = (dispatch: Function) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialog)
+export default connect(mapStateToProps, mapDispatchToProps)(Loading)
